@@ -1,4 +1,4 @@
 AVR-Debugger
 ============
 
-A cheap and portable AVR debugger based on an Atmega 8 and a 20x4 LCD Display
+Ein günstiger und portabler AVR Debugger, basierend auf einem Atmega 8 und einem 20x4 LCD
