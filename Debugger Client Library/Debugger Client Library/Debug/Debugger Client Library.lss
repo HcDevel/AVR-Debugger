@@ -1,0 +1,503 @@
+
+Debugger Client Library.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000250  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000000c  00800060  00000250  000002e4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000001  0080006c  0080006c  000002f0  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000002f0  2**0
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000068  00000000  00000000  00000320  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000077b  00000000  00000000  00000388  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000036a  00000000  00000000  00000b03  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000361  00000000  00000000  00000e6d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000f4  00000000  00000000  000011d0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000026c  00000000  00000000  000012c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000040f  00000000  00000000  00001530  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000048  00000000  00000000  0000193f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e0 e5       	ldi	r30, 0x50	; 80
+  3a:	f2 e0       	ldi	r31, 0x02	; 2
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	ac 36       	cpi	r26, 0x6C	; 108
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+  48:	20 e0       	ldi	r18, 0x00	; 0
+  4a:	ac e6       	ldi	r26, 0x6C	; 108
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	ad 36       	cpi	r26, 0x6D	; 109
+  54:	b2 07       	cpc	r27, r18
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	02 d0       	rcall	.+4      	; 0x5e <main>
+  5a:	f8 c0       	rjmp	.+496    	; 0x24c <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <main>:
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  5e:	2f ef       	ldi	r18, 0xFF	; 255
+  60:	84 e3       	ldi	r24, 0x34	; 52
+  62:	9c e0       	ldi	r25, 0x0C	; 12
+  64:	21 50       	subi	r18, 0x01	; 1
+  66:	80 40       	sbci	r24, 0x00	; 0
+  68:	90 40       	sbci	r25, 0x00	; 0
+  6a:	e1 f7       	brne	.-8      	; 0x64 <main+0x6>
+  6c:	00 c0       	rjmp	.+0      	; 0x6e <main+0x10>
+  6e:	00 00       	nop
+#include <avr/io.h>
+
+
+int main(void) {
+	_delay_ms(500);
+	debug_init();
+  70:	1a d0       	rcall	.+52     	; 0xa6 <debug_init>
+	
+
+	// convert 123 to string [buf]
+	
+	debug_int("PWM [Hz]", 230);*/
+	breakpoint("Test");
+  72:	80 e6       	ldi	r24, 0x60	; 96
+  74:	90 e0       	ldi	r25, 0x00	; 0
+  76:	76 d0       	rcall	.+236    	; 0x164 <breakpoint>
+	unsigned long test = 0;
+  78:	c1 2c       	mov	r12, r1
+  7a:	d1 2c       	mov	r13, r1
+  7c:	76 01       	movw	r14, r12
+	while (1) {
+		debug_int("Msg", test);
+  7e:	b7 01       	movw	r22, r14
+  80:	a6 01       	movw	r20, r12
+  82:	85 e6       	ldi	r24, 0x65	; 101
+  84:	90 e0       	ldi	r25, 0x00	; 0
+  86:	3f d0       	rcall	.+126    	; 0x106 <debug_int>
+  88:	2f ef       	ldi	r18, 0xFF	; 255
+  8a:	89 e6       	ldi	r24, 0x69	; 105
+  8c:	98 e1       	ldi	r25, 0x18	; 24
+  8e:	21 50       	subi	r18, 0x01	; 1
+  90:	80 40       	sbci	r24, 0x00	; 0
+  92:	90 40       	sbci	r25, 0x00	; 0
+  94:	e1 f7       	brne	.-8      	; 0x8e <main+0x30>
+  96:	00 c0       	rjmp	.+0      	; 0x98 <main+0x3a>
+  98:	00 00       	nop
+		_delay_ms(1000);
+		test++;
+  9a:	2f ef       	ldi	r18, 0xFF	; 255
+  9c:	c2 1a       	sub	r12, r18
+  9e:	d2 0a       	sbc	r13, r18
+  a0:	e2 0a       	sbc	r14, r18
+  a2:	f2 0a       	sbc	r15, r18
+  a4:	ec cf       	rjmp	.-40     	; 0x7e <main+0x20>
+
+000000a6 <debug_init>:
+#include <stdlib.h>
+
+unsigned char receive = 0;
+
+void debug_init() {
+	CLOCK_DDR |= (1<<CLOCK_PIN); //Clock Ausgang
+  a6:	a3 9a       	sbi	0x14, 3	; 20
+	DATA_DDR |= (1<<DATA_PIN); //Data Ausgang
+  a8:	a5 9a       	sbi	0x14, 5	; 20
+  aa:	08 95       	ret
+
+000000ac <send>:
+}
+
+void send (uint8_t letter_value) { //char wird direkt in ASCII Dezimal umgewandelt
+	if (receive == 0) {
+  ac:	90 91 6c 00 	lds	r25, 0x006C
+  b0:	91 11       	cpse	r25, r1
+  b2:	0f c0       	rjmp	.+30     	; 0xd2 <send+0x26>
+  b4:	97 e0       	ldi	r25, 0x07	; 7
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  b6:	25 e3       	ldi	r18, 0x35	; 53
+  b8:	2a 95       	dec	r18
+  ba:	f1 f7       	brne	.-4      	; 0xb8 <send+0xc>
+  bc:	00 00       	nop
+		uint8_t count = 0;
+	
+		while (count < 7) { //Es müssen 7 Bit übertragen werden
+			_delay_us(20); //Wartezeit zum lesen am Debugger
+		
+			if (letter_value%2 == 1) { //Umrechnung in eine Dualzahl
+  be:	80 ff       	sbrs	r24, 0
+  c0:	02 c0       	rjmp	.+4      	; 0xc6 <send+0x1a>
+				DATA_PORT |= (1<<DATA_PIN); //Durch Pullup am Debugger ist logisch 1 low
+  c2:	ad 9a       	sbi	0x15, 5	; 21
+  c4:	01 c0       	rjmp	.+2      	; 0xc8 <send+0x1c>
+			} else {
+				DATA_PORT &= ~(1<<DATA_PIN);
+  c6:	ad 98       	cbi	0x15, 5	; 21
+			}
+			letter_value = letter_value / 2;
+  c8:	86 95       	lsr	r24
+		
+			CLOCK_PORT &= ~(1<<CLOCK_PIN); //Übertragungstakt toggeln
+  ca:	ab 98       	cbi	0x15, 3	; 21
+			CLOCK_PORT |= (1<<CLOCK_PIN);
+  cc:	ab 9a       	sbi	0x15, 3	; 21
+  ce:	91 50       	subi	r25, 0x01	; 1
+
+void send (uint8_t letter_value) { //char wird direkt in ASCII Dezimal umgewandelt
+	if (receive == 0) {
+		uint8_t count = 0;
+	
+		while (count < 7) { //Es müssen 7 Bit übertragen werden
+  d0:	91 f7       	brne	.-28     	; 0xb6 <send+0xa>
+  d2:	08 95       	ret
+
+000000d4 <send_string>:
+			count += 1; //Hochsetzen des Bitzählers
+		}
+	}
+}
+
+void send_string(const char *data ){
+  d4:	0f 93       	push	r16
+  d6:	1f 93       	push	r17
+  d8:	cf 93       	push	r28
+  da:	df 93       	push	r29
+  dc:	fc 01       	movw	r30, r24
+	uint8_t sent = 0;
+	while( *data != '\0' && sent < 20) { //Sendet maximal 20 Zeichen, egal wie lang die Eingabe ist
+  de:	80 81       	ld	r24, Z
+  e0:	88 23       	and	r24, r24
+  e2:	61 f0       	breq	.+24     	; 0xfc <send_string+0x28>
+  e4:	ef 01       	movw	r28, r30
+  e6:	21 96       	adiw	r28, 0x01	; 1
+  e8:	8f 01       	movw	r16, r30
+  ea:	0b 5e       	subi	r16, 0xEB	; 235
+  ec:	1f 4f       	sbci	r17, 0xFF	; 255
+		send( *data++ );
+  ee:	de df       	rcall	.-68     	; 0xac <send>
+	}
+}
+
+void send_string(const char *data ){
+	uint8_t sent = 0;
+	while( *data != '\0' && sent < 20) { //Sendet maximal 20 Zeichen, egal wie lang die Eingabe ist
+  f0:	89 91       	ld	r24, Y+
+  f2:	88 23       	and	r24, r24
+  f4:	19 f0       	breq	.+6      	; 0xfc <send_string+0x28>
+  f6:	c0 17       	cp	r28, r16
+  f8:	d1 07       	cpc	r29, r17
+  fa:	c9 f7       	brne	.-14     	; 0xee <send_string+0x1a>
+		send( *data++ );
+		sent = sent + 1;
+	}
+}
+  fc:	df 91       	pop	r29
+  fe:	cf 91       	pop	r28
+ 100:	1f 91       	pop	r17
+ 102:	0f 91       	pop	r16
+ 104:	08 95       	ret
+
+00000106 <debug_int>:
+	send(1);
+	send_string(text);
+	send(2);
+}
+
+void debug_int(const char *name, signed long integer) {
+ 106:	cf 92       	push	r12
+ 108:	df 92       	push	r13
+ 10a:	ef 92       	push	r14
+ 10c:	ff 92       	push	r15
+ 10e:	0f 93       	push	r16
+ 110:	1f 93       	push	r17
+ 112:	cf 93       	push	r28
+ 114:	df 93       	push	r29
+ 116:	00 d0       	rcall	.+0      	; 0x118 <debug_int+0x12>
+ 118:	00 d0       	rcall	.+0      	; 0x11a <debug_int+0x14>
+ 11a:	00 d0       	rcall	.+0      	; 0x11c <debug_int+0x16>
+ 11c:	cd b7       	in	r28, 0x3d	; 61
+ 11e:	de b7       	in	r29, 0x3e	; 62
+ 120:	8c 01       	movw	r16, r24
+ 122:	6a 01       	movw	r12, r20
+ 124:	7b 01       	movw	r14, r22
+	send(1);
+ 126:	81 e0       	ldi	r24, 0x01	; 1
+ 128:	c1 df       	rcall	.-126    	; 0xac <send>
+	send_string(name);
+ 12a:	c8 01       	movw	r24, r16
+ 12c:	d3 df       	rcall	.-90     	; 0xd4 <send_string>
+	send_string(": ");
+ 12e:	89 e6       	ldi	r24, 0x69	; 105
+ 130:	90 e0       	ldi	r25, 0x00	; 0
+ 132:	d0 df       	rcall	.-96     	; 0xd4 <send_string>
+    } else if (__radix < 2 || __radix > 36) {
+	*__s = 0;
+	return __s;
+    } else {
+	extern char *__itoa_ncheck (int, char *, unsigned char);
+	return __itoa_ncheck (__val, __s, __radix);
+ 134:	4a e0       	ldi	r20, 0x0A	; 10
+ 136:	be 01       	movw	r22, r28
+ 138:	6f 5f       	subi	r22, 0xFF	; 255
+ 13a:	7f 4f       	sbci	r23, 0xFF	; 255
+ 13c:	c6 01       	movw	r24, r12
+ 13e:	53 d0       	rcall	.+166    	; 0x1e6 <__itoa_ncheck>
+	char snum[6];
+	send_string(itoa(integer, snum, 10));
+ 140:	c9 df       	rcall	.-110    	; 0xd4 <send_string>
+	send(2);
+ 142:	82 e0       	ldi	r24, 0x02	; 2
+ 144:	b3 df       	rcall	.-154    	; 0xac <send>
+}
+ 146:	26 96       	adiw	r28, 0x06	; 6
+ 148:	0f b6       	in	r0, 0x3f	; 63
+ 14a:	f8 94       	cli
+ 14c:	de bf       	out	0x3e, r29	; 62
+ 14e:	0f be       	out	0x3f, r0	; 63
+ 150:	cd bf       	out	0x3d, r28	; 61
+ 152:	df 91       	pop	r29
+ 154:	cf 91       	pop	r28
+ 156:	1f 91       	pop	r17
+ 158:	0f 91       	pop	r16
+ 15a:	ff 90       	pop	r15
+ 15c:	ef 90       	pop	r14
+ 15e:	df 90       	pop	r13
+ 160:	cf 90       	pop	r12
+ 162:	08 95       	ret
+
+00000164 <breakpoint>:
+
+void breakpoint(const char *name) {
+ 164:	cf 93       	push	r28
+ 166:	df 93       	push	r29
+ 168:	ec 01       	movw	r28, r24
+	DDRC |= (1<<4); //Debug LED TODO: remove
+ 16a:	a4 9a       	sbi	0x14, 4	; 20
+	
+	send(3);
+ 16c:	83 e0       	ldi	r24, 0x03	; 3
+ 16e:	9e df       	rcall	.-196    	; 0xac <send>
+	send_string(name);
+ 170:	ce 01       	movw	r24, r28
+ 172:	b0 df       	rcall	.-160    	; 0xd4 <send_string>
+	send(2);
+ 174:	82 e0       	ldi	r24, 0x02	; 2
+ 176:	9a df       	rcall	.-204    	; 0xac <send>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 178:	8f e1       	ldi	r24, 0x1F	; 31
+ 17a:	9e e4       	ldi	r25, 0x4E	; 78
+ 17c:	01 97       	sbiw	r24, 0x01	; 1
+ 17e:	f1 f7       	brne	.-4      	; 0x17c <breakpoint+0x18>
+ 180:	00 c0       	rjmp	.+0      	; 0x182 <breakpoint+0x1e>
+ 182:	00 00       	nop
+	
+	_delay_ms(10); //Auf Empfang umschalten, Wartezeit für Pegelwechsel abwarten
+	receive = 1;
+ 184:	81 e0       	ldi	r24, 0x01	; 1
+ 186:	80 93 6c 00 	sts	0x006C, r24
+	DATA_DDR &= ~(1<<DATA_PIN);
+ 18a:	a5 98       	cbi	0x14, 5	; 20
+	DATA_PORT|=(1<<DATA_PIN);
+ 18c:	ad 9a       	sbi	0x15, 5	; 21
+	CLOCK_PORT &= ~(1<<CLOCK_PIN); //Clock Pin ist HIGH während receive
+ 18e:	ab 98       	cbi	0x15, 3	; 21
+ 190:	8f e1       	ldi	r24, 0x1F	; 31
+ 192:	9e e4       	ldi	r25, 0x4E	; 78
+ 194:	01 97       	sbiw	r24, 0x01	; 1
+ 196:	f1 f7       	brne	.-4      	; 0x194 <breakpoint+0x30>
+ 198:	00 c0       	rjmp	.+0      	; 0x19a <breakpoint+0x36>
+ 19a:	00 00       	nop
+	_delay_ms(10);
+	
+	while ((DATA_INPUT_PIN & (1<<DATA_PIN))) { //Auf Pegeländerung warten zum Fortfahren
+ 19c:	9d 9b       	sbis	0x13, 5	; 19
+ 19e:	09 c0       	rjmp	.+18     	; 0x1b2 <breakpoint+0x4e>
+		PORTC |= (1<<4);
+ 1a0:	ac 9a       	sbi	0x15, 4	; 21
+ 1a2:	8f e1       	ldi	r24, 0x1F	; 31
+ 1a4:	9e e4       	ldi	r25, 0x4E	; 78
+ 1a6:	01 97       	sbiw	r24, 0x01	; 1
+ 1a8:	f1 f7       	brne	.-4      	; 0x1a6 <breakpoint+0x42>
+ 1aa:	00 c0       	rjmp	.+0      	; 0x1ac <breakpoint+0x48>
+ 1ac:	00 00       	nop
+	DATA_DDR &= ~(1<<DATA_PIN);
+	DATA_PORT|=(1<<DATA_PIN);
+	CLOCK_PORT &= ~(1<<CLOCK_PIN); //Clock Pin ist HIGH während receive
+	_delay_ms(10);
+	
+	while ((DATA_INPUT_PIN & (1<<DATA_PIN))) { //Auf Pegeländerung warten zum Fortfahren
+ 1ae:	9d 99       	sbic	0x13, 5	; 19
+ 1b0:	f7 cf       	rjmp	.-18     	; 0x1a0 <breakpoint+0x3c>
+		PORTC |= (1<<4);
+		_delay_ms(10);
+	}
+	
+	PORTC &= ~(1<<4);
+ 1b2:	ac 98       	cbi	0x15, 4	; 21
+ 1b4:	8f e1       	ldi	r24, 0x1F	; 31
+ 1b6:	9e e4       	ldi	r25, 0x4E	; 78
+ 1b8:	01 97       	sbiw	r24, 0x01	; 1
+ 1ba:	f1 f7       	brne	.-4      	; 0x1b8 <breakpoint+0x54>
+ 1bc:	00 c0       	rjmp	.+0      	; 0x1be <breakpoint+0x5a>
+ 1be:	00 00       	nop
+	_delay_ms(10);
+	receive = 0;
+ 1c0:	10 92 6c 00 	sts	0x006C, r1
+	
+	DATA_DDR |= (1<<DATA_PIN);
+ 1c4:	a5 9a       	sbi	0x14, 5	; 20
+	DATA_PORT|=(1<<DATA_PIN);
+ 1c6:	ad 9a       	sbi	0x15, 5	; 21
+	CLOCK_PORT |= (1<<CLOCK_PIN);
+ 1c8:	ab 9a       	sbi	0x15, 3	; 21
+ 1ca:	9f ef       	ldi	r25, 0xFF	; 255
+ 1cc:	24 e3       	ldi	r18, 0x34	; 52
+ 1ce:	8c e0       	ldi	r24, 0x0C	; 12
+ 1d0:	91 50       	subi	r25, 0x01	; 1
+ 1d2:	20 40       	sbci	r18, 0x00	; 0
+ 1d4:	80 40       	sbci	r24, 0x00	; 0
+ 1d6:	e1 f7       	brne	.-8      	; 0x1d0 <breakpoint+0x6c>
+ 1d8:	00 c0       	rjmp	.+0      	; 0x1da <breakpoint+0x76>
+ 1da:	00 00       	nop
+	
+	_delay_ms(500);
+	send(4);
+ 1dc:	84 e0       	ldi	r24, 0x04	; 4
+ 1de:	66 df       	rcall	.-308    	; 0xac <send>
+ 1e0:	df 91       	pop	r29
+ 1e2:	cf 91       	pop	r28
+ 1e4:	08 95       	ret
+
+000001e6 <__itoa_ncheck>:
+ 1e6:	bb 27       	eor	r27, r27
+ 1e8:	4a 30       	cpi	r20, 0x0A	; 10
+ 1ea:	31 f4       	brne	.+12     	; 0x1f8 <__itoa_ncheck+0x12>
+ 1ec:	99 23       	and	r25, r25
+ 1ee:	22 f4       	brpl	.+8      	; 0x1f8 <__itoa_ncheck+0x12>
+ 1f0:	bd e2       	ldi	r27, 0x2D	; 45
+ 1f2:	90 95       	com	r25
+ 1f4:	81 95       	neg	r24
+ 1f6:	9f 4f       	sbci	r25, 0xFF	; 255
+ 1f8:	01 c0       	rjmp	.+2      	; 0x1fc <__utoa_common>
+
+000001fa <__utoa_ncheck>:
+ 1fa:	bb 27       	eor	r27, r27
+
+000001fc <__utoa_common>:
+ 1fc:	fb 01       	movw	r30, r22
+ 1fe:	55 27       	eor	r21, r21
+ 200:	aa 27       	eor	r26, r26
+ 202:	88 0f       	add	r24, r24
+ 204:	99 1f       	adc	r25, r25
+ 206:	aa 1f       	adc	r26, r26
+ 208:	a4 17       	cp	r26, r20
+ 20a:	10 f0       	brcs	.+4      	; 0x210 <__utoa_common+0x14>
+ 20c:	a4 1b       	sub	r26, r20
+ 20e:	83 95       	inc	r24
+ 210:	50 51       	subi	r21, 0x10	; 16
+ 212:	b9 f7       	brne	.-18     	; 0x202 <__utoa_common+0x6>
+ 214:	a0 5d       	subi	r26, 0xD0	; 208
+ 216:	aa 33       	cpi	r26, 0x3A	; 58
+ 218:	08 f0       	brcs	.+2      	; 0x21c <__utoa_common+0x20>
+ 21a:	a9 5d       	subi	r26, 0xD9	; 217
+ 21c:	a1 93       	st	Z+, r26
+ 21e:	00 97       	sbiw	r24, 0x00	; 0
+ 220:	79 f7       	brne	.-34     	; 0x200 <__utoa_common+0x4>
+ 222:	b1 11       	cpse	r27, r1
+ 224:	b1 93       	st	Z+, r27
+ 226:	11 92       	st	Z+, r1
+ 228:	cb 01       	movw	r24, r22
+ 22a:	00 c0       	rjmp	.+0      	; 0x22c <strrev>
+
+0000022c <strrev>:
+ 22c:	dc 01       	movw	r26, r24
+ 22e:	fc 01       	movw	r30, r24
+ 230:	67 2f       	mov	r22, r23
+ 232:	71 91       	ld	r23, Z+
+ 234:	77 23       	and	r23, r23
+ 236:	e1 f7       	brne	.-8      	; 0x230 <strrev+0x4>
+ 238:	32 97       	sbiw	r30, 0x02	; 2
+ 23a:	04 c0       	rjmp	.+8      	; 0x244 <strrev+0x18>
+ 23c:	7c 91       	ld	r23, X
+ 23e:	6d 93       	st	X+, r22
+ 240:	70 83       	st	Z, r23
+ 242:	62 91       	ld	r22, -Z
+ 244:	ae 17       	cp	r26, r30
+ 246:	bf 07       	cpc	r27, r31
+ 248:	c8 f3       	brcs	.-14     	; 0x23c <strrev+0x10>
+ 24a:	08 95       	ret
+
+0000024c <_exit>:
+ 24c:	f8 94       	cli
+
+0000024e <__stop_program>:
+ 24e:	ff cf       	rjmp	.-2      	; 0x24e <__stop_program>
